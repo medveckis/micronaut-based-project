@@ -1,0 +1,43 @@
+micronaut:
+#  executors:
+#    io:
+#      type: fixed
+#      nThreads: 75
+  http:
+    client:
+#      read-timeout: 1s
+#      read-idle-timeout: 1s
+#      connect-timeout: 1s
+  server:
+    port: 8903
+#    read-timeout: 1
+  application:
+    name: borrow-management-service
+datasources:
+  default:
+    url: jdbc:h2:mem:borrowmanagementdb
+    driverClassName: org.h2.Driver
+    username: sa
+    #    password: ''
+    schema-generate: CREATE_DROP
+    dialect: H2
+netty:
+  default:
+    allocator:
+      max-order: 3
+
+jpa:
+  default:
+    entity-scan:
+      packages: 'io.medveckis.model'
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: create-drop
+      show_sql: true
+
+consul:
+  client:
+    registration:
+      enabled: true
+    defaultZone: "${CONSUL_HOST:localhost}:${CONSUL_PORT:8500}"
